@@ -1,0 +1,3 @@
+https://github.com/Oliko136/code-jedi-front/pull/2
+https://github.com/Oliko136/code-jedi-server/pull/13
+https://github.com/Oliko136/code-jedi-front/pull/154
