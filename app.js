@@ -13,7 +13,7 @@ import columnRouter from "./routes/columnRoutes.js";
 import cardRouter from "./routes/cardRoutes.js";
 import emailRouter from "./routes/emailRoutes.js";
 
-const { DB_HOST, PORT } = process.env;
+const { DB_HOST, PORT=4000 } = process.env;
 
 const app = express();
 
