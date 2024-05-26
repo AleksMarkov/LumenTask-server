@@ -38,12 +38,15 @@ const updateBoard = async (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
   const board = await boardServices.getBoardByFilter({ owner, title });
-  if (board) {
+
+  if (board && !board._id.equals(id)) { 
     throw HttpError(409, "This title already exists");
   }
+
   const result = await boardServices.updateBoard({ owner, _id: id }, req.body);
+  
   if (!result) {
-    throw HttpError(404, "Not found");
+    throw HttpError(404, "This board is not found");
   }
   res.json(result);
 };
