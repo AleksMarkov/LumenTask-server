@@ -20,7 +20,7 @@ const sendHelpEmail = async (req, res) => {
   await sendEmail(emailToUser);
 
   const emailToSupport = {
-    to: "taskpro.project@gmail.com",
+    to: "aleks.markov@hotmail.com",
     subject: "Support notification",
     html: `<p>Dear Team,<br>   The customer ${name} has sent you a help email.<br>
     Comment from the user: ${comment}<br> Email for reply: ${email}.
