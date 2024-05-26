@@ -14,7 +14,7 @@ const sendHelpEmail = async (req, res) => {
     We thank you for your email.<br>
     <br>      
     Best regards,<br>
-    Task Pro Support Team
+    LumenTask Support Team
    </p>`,
   };
   await sendEmail(emailToUser);
@@ -22,8 +22,13 @@ const sendHelpEmail = async (req, res) => {
   const emailToSupport = {
     to: "aleks.markov@hotmail.com",
     subject: "Support notification",
-    html: `<p>Dear Team,<br>   The customer ${name} has sent you a help email.<br>
-    Comment from the user: ${comment}<br> Email for reply: ${email}.
+    html: `<p>Dear Team,<br>
+    <br>
+       The customer ${name} has sent you a help email.<br>
+    Comment from the user: ${comment}<br> Email for reply: ${email}.<br>
+    <br>      
+    Best regards,<br>
+    LumenTask Support Team
    </p>`,
   };
   await sendEmail(emailToSupport);
