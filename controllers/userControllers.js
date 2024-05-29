@@ -62,31 +62,30 @@ const updateAvatar = async (req, res, next) => {
   }
   const { _id } = req.user;
   const { path: oldPath } = req.file;
-  // const newPath = path.join(posterPath, "newfile.jpg");
 
-  // Jimp.read(oldPath, (err, lenna) => {
-  //   if (err) throw err;
-  //   lenna.resize(250, 250).quality(90).greyscale().write(newPath);
-  // });
-  // await fs.unlink(oldPath);
-  const { url } = await cloudinary.uploader.upload(oldPath, {
+  // Upload image to Cloudinary without transformations
+  const uploadResponse = await cloudinary.uploader.upload(oldPath, {
     folder: "avatars",
   });
+
+  // Delete the local file after upload
   await fs.unlink(oldPath);
-  const result = await userServices.updateUser({ _id }, { avatar: url });
+
+  // Retrieve the URL with transformations
+  const transformedUrl = cloudinary.url(uploadResponse.public_id, {
+    transformation: [
+      { aspect_ratio: "1.0", gravity: "face", height: 300, width: 300, crop: "thumb"},
+      {radius: 8},
+      { border: "2px_solid_lightgreen" }
+    ]
+  });
+
+  // Update user profile with transformed image URL
+  const result = await userServices.updateUser({ _id }, { avatar: transformedUrl });
+
   res.json({
     avatar: result.avatar,
   });
-  // await cloudFunction(_id, newPath);
-
-  // async function cloudFunction(_id, newPath) {
-  //   try {
-  //     await new Promise((resolve) => setTimeout(resolve, 100));
-
-  // } catch (error) {
-  //   next(error);
-  // }
-  // }
 };
 
 export default {
