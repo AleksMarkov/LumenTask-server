@@ -7,8 +7,6 @@ import HttpError from "../helpers/HttpError.js";
 import controllerDecorator from "../helpers/controllerDecorator.js";
 import cloudinary from "../helpers/cloudinary.js";
 
-const posterPath = path.resolve("images", "public", "avatar");
-
 const updateProfile = async (req, res, next) => {
   const { email } = req.user;
   const { password } = req.body;
@@ -56,36 +54,33 @@ const updateTheme = async (req, res) => {
   });
 };
 
-const updateAvatar = async (req, res, next) => {
+const updateAvatar = async (req, res ) => {
   if (!req.file) {
     throw HttpError(400, "Please send the file");
   }
   const { _id } = req.user;
   const { path: oldPath } = req.file;
 
-  // Upload image to Cloudinary without transformations
+  // Upload image to Cloudinary with  specific public_id
   const uploadResponse = await cloudinary.uploader.upload(oldPath, {
     folder: "avatars",
+    public_id: _id
   });
 
   // Delete the local file after upload
   await fs.unlink(oldPath);
 
-  // Retrieve the URL with transformations
-  const transformedUrl = cloudinary.url(uploadResponse.public_id, {
-    transformation: [
-      { aspect_ratio: "1.0", gravity: "face", height: 300, width: 300, crop: "thumb"},
-      {radius: 8},
-      { border: "2px_solid_lightgreen" }
-    ]
-  });
+  // Directly use the URL from the upload response without applying further transformations here
+  const avatarUrl = uploadResponse.url;
 
-  // Update user profile with transformed image URL
-  const result = await userServices.updateUser({ _id }, { avatar: transformedUrl });
+  // Update user profile with the new avatar URL
+  const updateResult = await userServices.updateUser({ _id }, { avatar: avatarUrl });
 
+  // Respond with the new avatar URL
   res.json({
-    avatar: result.avatar,
+    avatar: updateResult.avatar,
   });
+
 };
 
 export default {
