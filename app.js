@@ -1,3 +1,4 @@
+//app.jsx
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -13,7 +14,7 @@ import columnRouter from "./routes/columnRoutes.js";
 import cardRouter from "./routes/cardRoutes.js";
 import emailRouter from "./routes/emailRoutes.js";
 
-const { DB_HOST, PORT=4000 } = process.env;
+const { DB_HOST, PORT = 4000 } = process.env;
 
 const app = express();
 

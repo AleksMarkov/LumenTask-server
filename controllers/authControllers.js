@@ -1,10 +1,10 @@
+//authControllers.js
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import path from "path";
 import * as userServices from "../services/userServices.js";
 import HttpError from "../helpers/HttpError.js";
 import controllerDecorator from "../helpers/controllerDecorator.js";
-
 
 const { JWT_SECRET } = process.env;
 
@@ -35,8 +35,8 @@ const register = async (req, res) => {
       name: newUser.name,
       email: newUser.email,
       avatar: newUser.avatar,
-      theme: newUser.theme
-    }
+      theme: newUser.theme,
+    },
   });
 };
 
@@ -60,7 +60,7 @@ const login = async (req, res) => {
   await userServices.updateUser({ _id: id }, { token });
   res.json({
     token,
-    user: { name, email, avatar, theme }
+    user: { name, email, avatar, theme },
   });
 };
 
@@ -68,7 +68,7 @@ const getCurrentUser = async (req, res) => {
   const { name, email, avatar, theme } = req.user;
 
   res.json({
-    user: {name, email, avatar, theme}
+    user: { name, email, avatar, theme },
   });
 };
 
@@ -82,5 +82,5 @@ export default {
   register: controllerDecorator(register),
   login: controllerDecorator(login),
   getCurrentUser: controllerDecorator(getCurrentUser),
-  logout: controllerDecorator(logout)
+  logout: controllerDecorator(logout),
 };

@@ -1,3 +1,4 @@
+//columnControllers.js
 import HttpError from "../helpers/HttpError.js";
 import controllerDecorator from "../helpers/controllerDecorator.js";
 import * as columnServices from "../services/columnServices.js";

@@ -1,7 +1,6 @@
-
-import {sendEmail} from "../helpers/sendEmail.js";
+//emailControllers.js
+import { sendEmail } from "../helpers/sendEmail.js";
 import controllerDecorator from "../helpers/controllerDecorator.js";
-
 
 const sendHelpEmail = async (req, res) => {
   const { name } = req.user;
@@ -33,12 +32,9 @@ const sendHelpEmail = async (req, res) => {
   };
   await sendEmail(emailToSupport);
 
-
   res.json({ message: "Email sent successfully" });
-
 };
 
 export default {
-
   sendHelpEmail: controllerDecorator(sendHelpEmail),
 };

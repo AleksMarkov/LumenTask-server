@@ -1,3 +1,4 @@
+//boardControllers.js
 import HttpError from "../helpers/HttpError.js";
 import controllerDecorator from "../helpers/controllerDecorator.js";
 import * as boardServices from "../services/boardServices.js";
@@ -39,12 +40,12 @@ const updateBoard = async (req, res) => {
   const { title } = req.body;
   const board = await boardServices.getBoardByFilter({ owner, title });
 
-  if (board && !board._id.equals(id)) { 
+  if (board && !board._id.equals(id)) {
     throw HttpError(409, "This title already exists");
   }
 
   const result = await boardServices.updateBoard({ owner, _id: id }, req.body);
-  
+
   if (!result) {
     throw HttpError(404, "This board is not found");
   }

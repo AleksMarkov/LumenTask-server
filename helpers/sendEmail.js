@@ -1,3 +1,4 @@
+//sendEmail.js
 import nodemailer from "nodemailer";
 import "dotenv/config";
 
@@ -19,4 +20,3 @@ export const sendEmail = (data) => {
   const emailOptions = { ...data, from: UKR_NET_EMAIL_FROM };
   return transporter.sendMail(emailOptions);
 };
-

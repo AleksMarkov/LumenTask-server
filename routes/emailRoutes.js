@@ -1,3 +1,4 @@
+//emailRoutes.js
 import express from "express";
 import mailController from "../controllers/emailControllers.js";
 import { supportEmailSchema } from "../schemas/joiSchemas/emailSchemas.js";

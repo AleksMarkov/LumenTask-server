@@ -1,8 +1,12 @@
+//authRoutes.js
 import express from "express";
 import authControllers from "../controllers/authControllers.js";
 import validateBody from "../middlewares/validateBody.js";
 import authenticate from "../middlewares/authenticate.js";
-import { userLoginSchema, userRegistrationSchema } from "../schemas/joiSchemas/userSchemas.js";
+import {
+  userLoginSchema,
+  userRegistrationSchema,
+} from "../schemas/joiSchemas/userSchemas.js";
 
 const authRouter = express.Router();
 

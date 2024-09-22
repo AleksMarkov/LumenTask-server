@@ -1,3 +1,4 @@
+//boardRoutes.js
 import express from "express";
 import authenticate from "../middlewares/authenticate.js";
 import validateBody from "../middlewares/validateBody.js";
@@ -28,20 +29,6 @@ boardRouter.put(
   validateBody(boardEditSchema),
   boardControllers.updateBoard
 );
-
-// boardRouter.patch(
-//   "/:id/icons",
-//   isValidId,
-//   validateBody(boardEditIconSchema),
-//   boardControllers.updateBoardElements
-// );
-
-// boardRouter.patch(
-//   "/:id/background",
-//   isValidId,
-//   validateBody(boardEditBackgroundSchema),
-//   boardControllers.updateBoardElements
-// );
 
 boardRouter.delete("/:id", isValidId, boardControllers.deleteBoard);
 

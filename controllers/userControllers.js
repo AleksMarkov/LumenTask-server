@@ -1,3 +1,4 @@
+//userControllers.js
 import bcrypt from "bcrypt";
 import fs from "fs/promises";
 import path from "path";
@@ -54,7 +55,7 @@ const updateTheme = async (req, res) => {
   });
 };
 
-const updateAvatar = async (req, res ) => {
+const updateAvatar = async (req, res) => {
   if (!req.file) {
     throw HttpError(400, "Please send the file");
   }
@@ -64,7 +65,7 @@ const updateAvatar = async (req, res ) => {
   // Upload image to Cloudinary with  specific public_id
   const uploadResponse = await cloudinary.uploader.upload(oldPath, {
     folder: "avatars",
-    public_id: _id
+    public_id: _id,
   });
 
   // Delete the local file after upload
@@ -74,13 +75,15 @@ const updateAvatar = async (req, res ) => {
   const avatarUrl = uploadResponse.url;
 
   // Update user profile with the new avatar URL
-  const updateResult = await userServices.updateUser({ _id }, { avatar: avatarUrl });
+  const updateResult = await userServices.updateUser(
+    { _id },
+    { avatar: avatarUrl }
+  );
 
   // Respond with the new avatar URL
   res.json({
     avatar: updateResult.avatar,
   });
-
 };
 
 export default {

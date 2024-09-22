@@ -1,3 +1,4 @@
+//columnRoutes.js
 import express from "express";
 import authenticate from "../middlewares/authenticate.js";
 import validateBody from "../middlewares/validateBody.js";
